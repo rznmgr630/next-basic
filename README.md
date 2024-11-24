@@ -35,3 +35,9 @@ It basically simplifies the process of building the web application for producti
 5. Catch all segment :=> If you want to catch every nested route inside the same page you can use this [...slug]
    > **For eg:** If we want to handle `/docs/1/reviews/1/like/1` in the same file we can use this concept. In the given folder structure
    > we don't have the page.tsx for the docs dir so to use the same page.tsx which is inside the [...slug] we can update the folder name as [[...slug]]
+
+## Not found/404 Page
+
+Nest js by default displays the basic 404 page if no route is found, but we may use our own 404 page to display when no request route exists. To make that page, we can
+
+Create the not-found.tsx page in either the root label of the app directory or a separate directory.
