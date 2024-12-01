@@ -85,22 +85,23 @@ Metadata ensures accurate and relevant information is displated when your page i
 
 #### Configuring Metadata
 
-a. Export a static metadata object
-b. Export ad dynamic generateMetadata functions
+- Export a static metadata object
+- Export ad dynamic generateMetadata functions
 
 #### Rules
 
-a. Both layout.tsx and page.tsx can export metadata.
-c. If metadata exists in a layout, it will apply to all pages inside that layout.
-c. If defined in a page, it will only apply to that page.
-c. If metadata is available in both the layout and the page, the page will have the highest priority if they have the same property.
+- Both layout.tsx and page.tsx can export metadata.
+- If metadata exists in a layout, it will apply to all pages inside that layout.
+- If defined in a page, it will only apply to that page.
+- If metadata is available in both the layout and the page, the page will have the highest priority if they have the same property.
 
 ### Title Metadata
 
 In the title metdata we can pass the string and object as a value. In case of object we have 3 properties
-a. absolute: replace the template
-b. default: If the child page doesn't have any title then this text will be rendered `"This is the default title"`
-c. template: for dyanmically render the title `"%s |Rajan Midun"` in the child page we can have title as `"Coding"` and the result will be `Coding | Rajan Midun`
+
+- absolute: replace the template
+- default: If the child page doesn't have any title then this text will be rendered `"This is the default title"`
+- template: for dyanmically render the title `"%s |Rajan Midun"` in the child page we can have title as `"Coding"` and the result will be `Coding | Rajan Midun`
 
 ## 9. Link
 
