@@ -65,3 +65,39 @@ Benefits:
 - Organize Complex Code: Helps to group related pages and components without impacting the public-facing URLs.
 - Simplifies Nested Routes: Makes it easier to manage nested pages and routes without cluttering the folder structure.
 - Cleaner Codebase: Provides a clearer way to structure the application, especially in large projects.
+
+## 7. Layout
+
+> In Next.js, layouts are a way to share UI components across multiple routes while preserving their state. When navigating between pages, layouts do not re-render and maintain interactivity. Layouts can be defined in specific files like layout.js or layout.tsx, and they wrap the content of child routes using the children prop.
+
+Layouts can be nested to build complex page structures. For example, a root layout wraps around all pages in the application, while a specific route like /dashboard can have its own layout that shares a sidebar or header, wrapping pages within that route.
+
+The root layout is essential and should be placed in app/layout.tsx, which wraps the entire application. It contains the html and body tags, and all other layouts will be nested inside it. For more specific routes like /dashboard, you can add a layout in the app/dashboard/layout.tsx file.
+
+Layouts are Server Components by default, but can also be client-side components if needed. They do not have direct access to the current pathname or route segments, but this can be handled in client components using hooks like usePathname. Additionally, layouts can be used for data fetching, though passing data directly between a parent layout and its children is not possible.
+
+Layouts are a powerful feature in Next.js, especially when working with nested route structures, and they help maintain consistent UI elements such as headers and sidebars across multiple pages. For detailed guidance, you can refer to the official Next.js documentation on routing and layouts​
+
+## 8. Metadata
+
+Nest js provide and Metadata API which allows us to define the metadata of each page which ensure proper seo for increasing visibility and attracting users.
+Metadata ensures accurate and relevant information is displated when your page is served or indexed.
+
+#### Configuring Metadata
+
+a. Export a static metadata object
+b. Export ad dynamic generateMetadata functions
+
+#### Rules
+
+a. Both layout.tsx and page.tsx can export metadata.
+c. If metadata exists in a layout, it will apply to all pages inside that layout.
+c. If defined in a page, it will only apply to that page.
+c. If metadata is available in both the layout and the page, the page will have the highest priority if they have the same property.
+
+### Title Metadata
+
+In the title metdata we can pass the string and object as a value. In case of object we have 3 properties
+a. absolute: replace the template
+b. default: If the child page doesn't have any title then this text will be rendered `"This is the default title"`
+c. template: for dyanmically render the title `"%s |Rajan Midun"` in the child page we can have title as `"Coding"` and the result will be `Coding | Rajan Midun`
