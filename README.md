@@ -106,9 +106,10 @@ c. template: for dyanmically render the title `"%s |Rajan Midun"` in the child p
 
 Link is a react component which extends the html `<a>` element to prefetching and client-side navigation between routes.
 It can take multiple props
-a. `href`=> It contains the path or URL to navigate to.
-b. `replace` => It will replace the current history state. Default value is `false`.
-c. `scroll` => It controls whether the page scrolls to the top after navigation. Default is `true`
-d. `prefetch` => It determines whether the page's data should be prefetched in the background. Default is `true`
+
+- `href`=> It contains the path or URL to navigate to.
+- `replace` => It will replace the current history state. Default value is `false`.
+- `scroll` => It controls whether the page scrolls to the top after navigation. Default is `true`
+- `prefetch` => It determines whether the page's data should be prefetched in the background. Default is `true`
 
 > **Note:** If you want to programatically redirect the user to specific route then you can use `useRouter` front `next/navigation` package.
