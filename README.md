@@ -99,9 +99,9 @@ Metadata ensures accurate and relevant information is displated when your page i
 
 In the title metdata we can pass the string and object as a value. In case of object we have 3 properties
 
-- absolute: replace the template
-- default: If the child page doesn't have any title then this text will be rendered `"This is the default title"`
-- template: for dyanmically render the title `"%s |Rajan Midun"` in the child page we can have title as `"Coding"` and the result will be `Coding | Rajan Midun`
+- `absolute`: replace the template
+- `default`: If the child page doesn't have any title then this text will be rendered `"This is the default title"`
+- `template`: for dyanmically render the title `"%s |Rajan Midun"` in the child page we can have title as `"Coding"` and the result will be `Coding | Rajan Midun`
 
 ## 9. Link
 
