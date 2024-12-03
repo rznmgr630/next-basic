@@ -114,3 +114,15 @@ It can take multiple props
 - `prefetch` => It determines whether the page's data should be prefetched in the background. Default is `true`
 
 > **Note:** If you want to programatically redirect the user to specific route then you can use `useRouter` front `next/navigation` package.
+
+## 10. Template
+
+Template are similar to the layout but it creates a new instance for each of their children on navigation.
+This means when the user navigates between routes that shares the template, a new instance  of the child is mounted.
+DOM is recreated, state is not preservd in client component.
+
+```js
+export default function Template({ children }: { children: React.ReactNode }) {
+  return <div>{children}</div>
+}
+```
