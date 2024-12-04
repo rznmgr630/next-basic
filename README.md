@@ -127,7 +127,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
 }
 ```
 
-## Loading UI and Steaming
+## 11. Loading UI and Steaming
 
 - `loading.js:` Add a loading.js file for fallback UI (e.g., skeletons) during route loading, automatically wrapped in `<Suspense>`.
 - `Fast Navigation:` Navigation is instant and interruptible, with interactive shared layouts.
@@ -149,4 +149,55 @@ export default function App() {
     </Suspense>
   );
 }
+```
+
+## 12. error.js OR error.tsx
+
+- It is used the handle the unexpexted runtime errors and displays fallback UI.
+- It wraps a route segment and its nested children in a `React Error Boundry`.
+
+```js
+'use client' // Error boundaries must be Client Components
+
+import { useEffect } from 'react'
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  useEffect(() => {
+    console.error(error)
+  }, [error])
+
+  return (
+    <div>
+      <h2>Something went wrong!</h2>
+      <button
+        onClick={
+          // Attempt to recover by trying to re-render the segment
+          () => reset()
+        }
+      >
+        Try again
+      </button>
+    </div>
+  )
+}
+```
+
+> **Note:** If the layout.tsx and error.tsx are in the same dir then the error inside the layout.tsx will not be catched by the error.tsx since layout is always sit at the top level like
+
+```js
+<Layout>
+  <Template>
+    <ErrorBoundry fallback={<Error />}>
+      <Suspense fallback={<Loading />}>
+        <Page />
+      </Suspense>
+    </ErrorBoundry>
+  </Template>
+</Layout>
 ```
