@@ -118,11 +118,35 @@ It can take multiple props
 ## 10. Template
 
 Template are similar to the layout but it creates a new instance for each of their children on navigation.
-This means when the user navigates between routes that shares the template, a new instance  of the child is mounted.
+This means when the user navigates between routes that shares the template, a new instance of the child is mounted.
 DOM is recreated, state is not preservd in client component.
 
 ```js
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>
+  return <div>{children}</div>;
+}
+```
+
+## Loading UI and Steaming
+
+- `loading.js:` Add a loading.js file for fallback UI (e.g., skeletons) during route loading, automatically wrapped in `<Suspense>`.
+- `Fast Navigation:` Navigation is instant and interruptible, with interactive shared layouts.
+- `Streaming:` Breaks HTML into chunks, sending high-priority components first, improving TTFB and FCP.
+- `Suspense:` Wrap async components with `<Suspense>` to show fallback UI and enable progressive rendering.
+- `SEO-Friendly:` Ensures head tags load first, making streaming server-rendered and SEO-compatible.
+
+> **Note:** Suspense is a feature in React that helps manage asynchronous operations in your application. It allows you to show fallback UI (like loading spinners or skeletons) while waiting for asynchronous tasks to complete, such as fetching data or loading components.
+
+```js
+import React, { Suspense } from "react";
+
+const MyComponent = React.lazy(() => import("./MyComponent"));
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MyComponent />
+    </Suspense>
+  );
 }
 ```
