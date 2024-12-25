@@ -201,3 +201,18 @@ export default function Error({
   </Template>
 </Layout>
 ```
+
+## 13. Parallel Routes
+
+- Parallel routes are the advance routing mechanism that allows for the simultaneous rendering of multiple pages in the same layout.
+- In nest js we can define the parallel routes using the feature knowns as slots.
+- Slots helps to structure our content in modular fashion.
+- To define a slot, we use the `@folder` naming convention.
+- Each slot is then passed as a prop to its corresponding `layout.tsx` file
+
+
+#### Benefit
+- Ability to split a single layout into multiple slots, making the code more manageable.
+- Every slot of the layout can have its own loading and error state.
+- Most important in the case where each section has its own loading speed.
+- Each slot can essentially act as a mini-application, with its own navigation and state management.
