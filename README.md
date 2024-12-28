@@ -323,3 +323,17 @@ export default function Error({
     // }
   }
   ```
+
+## 18. Rendering
+
+- It is the process of transforming the code you write into user interfaces.
+- In next js choosing the right time and place to do this rendering is vital in building a performant application.
+
+### Client side Rendering
+
+- In this rendering the component code is directly transformed into a user interface within the browser(the client).
+
+#### Drawbacks
+
+- Generating a html that mainly contains a single div tag is not optimal for SEO as it provides less information for search engines to index.
+- Having the browser handling all the works such as fetching data, computing UI, and making HTML interactive, can slow things down. User may see blank space or a loading spinner while the page loads.
