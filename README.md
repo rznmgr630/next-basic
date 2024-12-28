@@ -337,3 +337,27 @@ export default function Error({
 
 - Generating a html that mainly contains a single div tag is not optimal for SEO as it provides less information for search engines to index.
 - Having the browser handling all the works such as fetching data, computing UI, and making HTML interactive, can slow things down. User may see blank space or a loading spinner while the page loads.
+
+## 19. Important Concepts
+
+- If you have more than one component on a page and each component has a different response time, you may use the `<Suspense>` element to surround each component so that the data is shown as soon as it is ready.
+- To restrict server functions (such as those exporting the DB URI) for server use only and client functions for client use only, you can use the `server-only `package by adding `import 'server-only'` in the file containing the server function. Similarly, we can use `client-only` for the function which should be only use in the client components.
+- Third-party packages are typically used on the client side, but if you need to use them in a server component, you can create a child component, mark it as a client component. Then, import the client component into the server component.
+- If you have a `client component` and its child components are not using `"use client"` keyword, all the child components will be treated as client componet.
+  i.e, A server component can have client component as a child but a client component cannot have the server component as a child by default. But if you want to use a server component inside the client component then you need to take the sever component as a children props.
+
+  ```js
+  <ClientComponent>
+    <ServerComponent />
+  </ClientComponent>;
+
+  // and inside the client component
+
+  export default function ClientComponent({ children }: { children: React.ReactNode }) {
+    return (
+      <>
+      {children}
+      <>
+    )
+  }
+  ```
