@@ -210,9 +210,60 @@ export default function Error({
 - To define a slot, we use the `@folder` naming convention.
 - Each slot is then passed as a prop to its corresponding `layout.tsx` file
 
-
 #### Benefit
+
 - Ability to split a single layout into multiple slots, making the code more manageable.
 - Every slot of the layout can have its own loading and error state.
 - Most important in the case where each section has its own loading speed.
 - Each slot can essentially act as a mini-application, with its own navigation and state management.
+
+## 14. Request Handler
+
+- It allows to create custom request handlers for a given route using the web Request and Response API.
+- Unlike page routes, which responds with the HTML content, route handlers allow you to create RESTful endpoints.
+- Route handlers are server side, ensuring that sensative information like private keys remains secure and never gets shipped to the browser.
+- It also helps to call the external API's.
+
+- GET METHOD
+
+  ```js
+  export function GET(request: NextRequest) {
+    const searchQuery = request.nextUrl.searchParams;
+    const searchKeyword = searchQuery.get("search");
+
+    let responseData = comments;
+
+    if (searchKeyword)
+      responseData = comments.filter((comment) =>
+        comment.comment.includes(searchKeyword)
+      );
+
+    return Response.json(responseData);
+
+    // return new Response("Hello world");
+  }
+  ```
+
+> **Note:** If you want to set the status then use `return new Response('Comment not found',{status:404})`.ALso, if you want to redirect the user then you can use redirect method from `next/navigation` which takes routes as a params.
+
+#### Request Header
+
+- HTTP Headers represents the meta information about the API request and response
+- HTTP request headers are sent by the client such as web browswer to the server. For e.g `User-Agent`, `Authorization` ,`Accept` etc
+- HTTP response headers are send by the server to the client which provides the information about the server and the data being sent in the response. E.g, `Content-Type`,
+
+  ```js
+  import { type NextRequest } from "next/server";
+  import { headers } from "next/headers";
+
+  export async function GET(request: NextRequest) {
+    const header = headers();
+    console.log(header.get("Authorization"));
+
+    return new Response("<h1>Hello Rajan",{
+      headers:{
+        "Content-Type:"text/html"
+      }
+    })
+  }
+  ```
