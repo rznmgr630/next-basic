@@ -338,7 +338,46 @@ export default function Error({
 - Generating a html that mainly contains a single div tag is not optimal for SEO as it provides less information for search engines to index.
 - Having the browser handling all the works such as fetching data, computing UI, and making HTML interactive, can slow things down. User may see blank space or a loading spinner while the page loads.
 
-## 19. Important Concepts
+## 19. Data Fetching
+
+### Server side
+
+```js
+ export default async function UserListing() {
+  const response=await fetch("https://jsonplaceholder.typicode.com/users",{
+    cache:"no-store"
+  });
+  const users= await response.json();
+
+   return (
+     <>
+    Render user data here
+     <>
+   )
+ }
+```
+
+- If you handle and eror create error.tsx in the same dir and loading state create loading.tsx. Note that the error.tsx is a client compoent.
+
+#### Caching
+
+- Next js will automatically catched the fetch GET requests data in the server side, which eliminate the refetching of data in every request.
+- When we send the get request during rendering, the next js will check the data cached for the cached response. `Rendering -> Data cached -> Data source`.
+- You can find the cached data inside the `.next/fetch-cache` dir inside the project dir.
+- If you want to Opt out the caching then you can pass the extra params in the request as `const response=await fetch("https://jsonplaceholder.typicode.com/     users",{cache:"no-store"});`
+  > **Note:** if you specify the `no-store` for a fetch request the subsequent fetch requests will also not be catched. But if you want to use the default behaviour for the subsequent request you can use `export const fetchCache="default-cache"` at the top of the file/component.
+  > **Note:** By default Next.js will catch the fetch() occurs before any dynamic functions such as cookies, headers, searchParams etc are used and will not cached requests found after these dynamic functions.
+  > **Note:** If you want to cached the data for certain time only you can pass and object after the URL as {next:{revalidate:10}} which will only cache the data for 10 sec only. or you can use `export const revalidate=10` at the top of the file.
+
+#### Request Memorization
+
+- It is a technique that deduplicates requests for the same data within a single render pass.
+- These approach allows for reuse of data in React components tree, prevents redundant network calls and enhance performance.
+- For the initial request, data is fetched from external source and cached in memory.
+- Subsequent requests for the same data within the same render pass retrieve the result from the memory, bypassing the need to make the request again.
+- `Rendering -> Request Memorization -> Data Cache -> Data source`
+
+## 20. Important Concepts
 
 - If you have more than one component on a page and each component has a different response time, you may use the `<Suspense>` element to surround each component so that the data is shown as soon as it is ready.
 - To restrict server functions (such as those exporting the DB URI) for server use only and client functions for client use only, you can use the `server-only `package by adding `import 'server-only'` in the file containing the server function. Similarly, we can use `client-only` for the function which should be only use in the client components.
