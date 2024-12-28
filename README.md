@@ -260,10 +260,36 @@ export default function Error({
     const header = headers();
     console.log(header.get("Authorization"));
 
-    return new Response("<h1>Hello Rajan",{
-      headers:{
-        "Content-Type:"text/html"
-      }
-    })
+    return new Response("<h1>Hello Rajan", {
+      headers: {
+        "Content-Type": "text/html",
+      },
+    });
   }
   ```
+
+## 15. Cookies
+
+- It is a small piece of data that a server sends to a user' browser.
+- The browser may store the cookie and send it back to the same server in the later requests.
+- Basically we use cookies for Session management, Tracking the user behaviour etc.
+
+  ```js
+  import { type NextRequest } from "next/server";
+  import { cookies } from "next/headers";
+
+  export async function GET(request: NextRequest) {
+    const cookieData = request.cookies.get("theme");
+    cookies().set("resultsPerPage", 10);
+    cookies().get("resultsPerPage");
+
+    return new Response("<h1>Hello Rajan", {
+      headers: {
+        "Content-Type": "text/html",
+        "Set-Cookie": "theme=dark",
+      },
+    });
+  }
+  ```
+
+  > **Note:** We can use either `request header` or the `cookies` from `next/headers` to get or set the cookie.
